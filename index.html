@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 
+            Hidden pic
+</title>
+    <style>
+        body{
+            height: 100%;
+            margin: 0;
+            background-color: black;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        /* LOGIN SCREEN WITH TOP SPOTLIGHT */
+        #login-screen {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Ye wahi upar se aane wali patli spotlight hai */
+            background-image: radial-gradient(ellipse at top, rgba(0, 212, 255, 0.4) 0%, transparent 70%);
+            background-size: 80% 60%; 
+            background-position: top center;
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            color: white;
+            text-transform: lowercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #00d4ff;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 12px;
+            width: 250px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: 2px solid white;
+            border-radius: 8px;
+            outline: none;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+
+        button {
+            padding: 12px 50px;
+            margin-top: 25px;
+            background: transparent;
+            color: white;
+            border: 3px solid #00d4ff;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 15px #00d4ff;
+            text-transform: uppercase;
+        }
+
+        /* MAIN PAGE (YOUR PIC) */
+        #main-page {
+            display: none;
+            text-align: center;
+            min-height: 110vh;
+            height: 100px;
+            width: 100vw;
+            background-image: url('my pic'); /* Apni pic ka sahi naam check karlein */
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <h1>enter secret code</h1>    
+        <input id="output" type="password" placeholder="type here.....">
+        <button onclick="unlock()">ACCESS</button>                
+    </div> 
+
+    <div id="main-page">
+                <h1> boss is here</h1>
+</div>   
+
+    <script>
+        function unlock() {
+            var pass = document.getElementById("output").value;
+            // Password '123' rakha hai, aap badal sakte hain
+            if (pass === "123") { 
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("main-page").style.display = "block";
+            } else {
+                alert("ACCESS DENIED!");
+            }
+        }
+    </script>         
+</body>
+</html>
