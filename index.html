@@ -2,202 +2,2216 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website 🌐 ©®</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>PROFESSIONAL LOGO STUDIO | INSTAGRAM INTEGRATION</title>
+    
+    <!-- Font Awesome 6 Pro -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <style>
-        body {
-            background-color: #0f0f0f; /* Deep Dark Background */
-            color: #FFB6C1;
-            font-family: 'Poppins', sans-serif;
+        /* ========== PROFESSIONAL DESIGN SYSTEM ========== */
+        :root {
+            --primary-50: #eef2ff;
+            --primary-100: #e0e7ff;
+            --primary-200: #c7d2fe;
+            --primary-300: #a5b4fc;
+            --primary-400: #818cf8;
+            --primary-500: #6366f1;
+            --primary-600: #4f46e5;
+            --primary-700: #4338ca;
+            --primary-800: #3730a3;
+            --primary-900: #312e81;
+            
+            --neutral-50: #fafafa;
+            --neutral-100: #f5f5f5;
+            --neutral-200: #e5e5e5;
+            --neutral-300: #d4d4d4;
+            --neutral-400: #a3a3a3;
+            --neutral-500: #737373;
+            --neutral-600: #525252;
+            --neutral-700: #404040;
+            --neutral-800: #262626;
+            --neutral-900: #171717;
+            
+            --success-500: #10b981;
+            --warning-500: #f59e0b;
+            --error-500: #ef4444;
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
+        
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--neutral-900);
+        }
+        
+        /* Professional Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--neutral-100);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-500);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-600);
+        }
+        
+        /* Login Overlay */
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 32px;
+            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: var(--shadow-2xl);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h2 {
+            color: var(--neutral-900);
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        
+        .login-header p {
+            color: var(--neutral-500);
+            font-size: 14px;
+        }
+        
+        .login-tabs {
+            display: flex;
+            gap: 8px;
+            background: var(--neutral-100);
+            padding: 4px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .login-tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            font-weight: 600;
+            color: var(--neutral-600);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .login-tab.active {
+            background: white;
+            color: var(--primary-600);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .login-form {
+            display: block;
+        }
+        
+        .login-form.hidden {
+            display: none;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--neutral-700);
+            margin-bottom: 6px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--neutral-200);
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: var(--primary-500);
+            outline: none;
+        }
+        
+        .input-group input:disabled {
+            background: var(--neutral-100);
+            opacity: 0.7;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary-600);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .login-btn:hover {
+            background: var(--primary-700);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .login-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .login-footer {
+            text-align: center;
+            color: var(--neutral-500);
+            font-size: 13px;
+        }
+        
+        .login-footer a {
+            color: var(--primary-600);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* OTP Section */
+        .otp-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--primary-50);
+            border-radius: 16px;
+            border: 2px solid var(--primary-200);
+        }
+        
+        .otp-display {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .otp-email {
+            background: white;
+            padding: 10px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-700);
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+        
+        .otp-message {
+            font-size: 12px;
+            color: var(--neutral-600);
+            margin-bottom: 5px;
+        }
+        
+        .otp-timer {
+            font-size: 11px;
+            color: var(--error-500);
+        }
+        
+        /* Email Display Badge */
+        .email-badge {
+            background: white;
+            border-radius: 30px;
+            padding: 8px 15px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-700);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid var(--primary-200);
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: var(--neutral-100);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 12px;
+            color: var(--neutral-600);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-box i {
+            color: var(--primary-600);
+            font-size: 16px;
+        }
+        
+        /* Main App */
+        #mainApp {
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        #mainApp.visible {
+            opacity: 1;
+        }
+        
+        .app-container {
+            max-width: 1920px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 48px;
+            box-shadow: var(--shadow-2xl);
+            overflow: hidden;
+        }
+        
+        /* Header with User Info */
+        .studio-header {
+            background: white;
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--neutral-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .studio-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .studio-logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-600), var(--primary-800));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .studio-title h1 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--neutral-900);
+        }
+        
+        .studio-title p {
+            color: var(--neutral-500);
+            font-size: 13px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--neutral-100);
+            padding: 8px 20px 8px 15px;
+            border-radius: 40px;
+        }
+        
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+        
+        .user-details {
+            text-align: left;
+        }
+        
+        .user-name {
+            font-weight: 700;
+            color: var(--neutral-900);
+            font-size: 15px;
+        }
+        
+        .user-email {
+            font-size: 11px;
+            color: var(--neutral-500);
+            margin-top: 2px;
+        }
+        
+        .user-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+            color: var(--neutral-600);
+            margin-top: 3px;
+        }
+        
+        .user-stats span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .studio-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .studio-btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .studio-btn.primary {
+            background: var(--primary-600);
+            color: white;
+        }
+        
+        .studio-btn.primary:hover {
+            background: var(--primary-700);
+            transform: translateY(-2px);
+        }
+        
+        .studio-btn.secondary {
+            background: var(--neutral-100);
+            color: var(--neutral-700);
+        }
+        
+        .studio-btn.secondary:hover {
+            background: var(--neutral-200);
+        }
+        
+        /* Main Grid */
+        .studio-main {
+            display: grid;
+            grid-template-columns: 300px 1fr 350px;
+            gap: 20px;
+            padding: 20px;
+            background: var(--neutral-50);
+        }
+        
+        /* ===== LEFT PANEL ===== */
+        .styles-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+            height: calc(100vh - 180px);
+            overflow-y: auto;
+        }
+        
+        .panel-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--neutral-900);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-500);
+        }
+        
+        .letter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+        
+        .letter-btn {
+            padding: 15px 5px;
+            background: var(--neutral-100);
+            border: 2px solid var(--neutral-200);
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .letter-btn:hover {
+            border-color: var(--primary-500);
+            background: var(--primary-100);
+            transform: translateY(-2px);
+        }
+        
+        .letter-btn.selected {
+            background: var(--primary-600);
+            color: white;
+            border-color: var(--primary-700);
+        }
+        
+        .style-section {
+            margin-bottom: 25px;
+        }
+        
+        .style-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--neutral-700);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .style-item {
+            background: var(--neutral-100);
+            border: 2px solid var(--neutral-200);
+            border-radius: 10px;
+            padding: 12px 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .style-item:hover {
+            border-color: var(--primary-500);
+            background: var(--primary-100);
+        }
+        
+        .style-item.selected {
+            background: var(--primary-600);
+            color: white;
+            border-color: var(--primary-700);
+        }
+        
+        /* Social Panel */
+        .social-panel {
+            margin-top: 20px;
+            background: var(--neutral-100);
+            border-radius: 20px;
+            padding: 15px;
+        }
+        
+        .social-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .social-header h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--neutral-800);
+        }
+        
+        .social-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 15px;
+        }
+        
+        .stat-card {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary-600);
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: var(--neutral-600);
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 2px solid var(--neutral-200);
+            border-radius: 30px;
+            font-size: 13px;
+        }
+        
+        .search-box input:focus {
+            border-color: var(--primary-500);
+            outline: none;
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--neutral-500);
+        }
+        
+        .users-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .user-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .user-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .user-item-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-400), var(--primary-600));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        
+        .user-item-info {
+            flex: 1;
+        }
+        
+        .user-item-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--neutral-900);
+        }
+        
+        .user-item-email {
+            font-size: 11px;
+            color: var(--neutral-500);
+        }
+        
+        .user-item-bio {
+            font-size: 11px;
+            color: var(--neutral-500);
+            margin-top: 2px;
+        }
+        
+        .follow-btn {
+            padding: 6px 15px;
+            background: var(--primary-600);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .follow-btn.following {
+            background: var(--neutral-300);
+            color: var(--neutral-700);
+        }
+        
+        /* Posts Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin-top: 15px;
+        }
+        
+        .post-item {
+            aspect-ratio: 1;
+            background: linear-gradient(45deg, var(--primary-100), var(--primary-200));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-600);
+            font-size: 20px;
+        }
+        
+        /* Stories */
+        .stories-row {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .story-circle {
+            min-width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-400), var(--primary-600));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            border: 3px solid white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* ===== CENTER PANEL ===== */
+        .canvas-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .canvas-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--neutral-900);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .canvas-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .canvas-action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+            background: var(--neutral-100);
+            color: var(--neutral-600);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .canvas-action-btn:hover {
+            background: var(--primary-600);
+            color: white;
+        }
+        
+        .canvas-container {
+            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+                        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+                        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            border-radius: 20px;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+            min-height: 500px;
         }
-
-        /* Background Stickers */
-        .bg-sticker {
-            position: fixed;
-            width: 60px;
-            opacity: 0.15; /* Halka sa dikhega background mein */
-            z-index: -1;
-            animation: float-bg 6s infinite ease-in-out;
+        
+        #mainCanvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            background: white;
         }
-
-        @keyframes float-bg {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-        }
-
-        /* Password Screen */
-        #search-box {
-            text-align: center;
-            z-index: 10;
-        }
-
-        input {
-            padding: 12px;
-            width: 240px;
-            border-radius: 25px;
-            border: 2px solid #FF69B4;
-            background: transparent;
-            color: white;
-            text-align: center;
-            outline: none;
-            font-size: 1rem;
-        }
-
-        button {
-            padding: 12px 30px;
-            border-radius: 25px;
-            border: none;
-            background: linear-gradient(45deg, #FF69B4, #FFB6C1);
-            color: black;
-            font-weight: bold;
+        
+        .canvas-info {
+            display: flex;
+            justify-content: space-between;
             margin-top: 15px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+            color: var(--neutral-600);
+            font-size: 13px;
         }
-
-        /* Content Styling */
-        #content {
-            display: none;
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
+        
+        /* ===== RIGHT PANEL ===== */
+        .controls-panel {
+            background: white;
+            border-radius: 24px;
             padding: 20px;
+            box-shadow: var(--shadow-md);
+            height: calc(100vh - 180px);
+            overflow-y: auto;
         }
-
-        /* Slow Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 2s ease; /* Bohot pyara slow effect */
+        
+        .control-tabs {
+            display: flex;
+            gap: 5px;
+            background: var(--neutral-100);
+            padding: 5px;
+            border-radius: 12px;
             margin-bottom: 20px;
         }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        
+        .control-tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--neutral-600);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-
-        h2.title {
-            font-family: 'Pacifico', cursive;
-            font-size: 2.2rem;
-            color: #fff;
-            text-shadow: 0 0 15px #FF69B4;
+        
+        .control-tab.active {
+            background: white;
+            color: var(--primary-600);
+            box-shadow: var(--shadow-sm);
         }
-
-        .line {
-            height: 1px;
-            background: linear-gradient(to right, transparent, gray, transparent);
+        
+        .tab-panel {
+            display: none;
+        }
+        
+        .tab-panel.active {
+            display: block;
+        }
+        
+        .control-group {
+            margin-bottom: 20px;
+        }
+        
+        .control-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--neutral-700);
+            margin-bottom: 8px;
+        }
+        
+        .control-input {
             width: 100%;
-            margin: 10px 0;
+            padding: 12px;
+            border: 2px solid var(--neutral-200);
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s;
         }
-
-        .nav-item { font-sjize: 1.3rem; letter-spacing: 2px; font-weight: 600; }
-        .neon { color: #fff; text-shadow: 0 0 10px #FFB6C1; }
-        .msg { color: #ccc; line-height: 1.8; font-size: 1rem; }
-
+        
+        .control-input:focus {
+            border-color: var(--primary-500);
+            outline: none;
+        }
+        
+        .color-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .color-box {
+            text-align: center;
+        }
+        
+        .color-box input[type="color"] {
+            width: 100%;
+            height: 40px;
+            border: 2px solid var(--neutral-200);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .color-box span {
+            font-size: 11px;
+            color: var(--neutral-600);
+            display: block;
+            margin-top: 4px;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .slider {
+            flex: 1;
+            height: 6px;
+            -webkit-appearance: none;
+            background: var(--neutral-200);
+            border-radius: 10px;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-600);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .slider-value {
+            min-width: 45px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--primary-600);
+            font-size: 13px;
+        }
+        
+        .line-item {
+            background: var(--neutral-100);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .line-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .line-title {
+            font-weight: 600;
+            color: var(--neutral-700);
+            font-size: 13px;
+        }
+        
+        .line-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .line-actions i {
+            cursor: pointer;
+            color: var(--neutral-500);
+            transition: all 0.3s;
+        }
+        
+        .line-actions i:hover {
+            color: var(--primary-600);
+        }
+        
+        .line-input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid var(--neutral-200);
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        
+        .download-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid var(--neutral-200);
+        }
+        
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .download-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .download-btn.primary {
+            background: var(--primary-600);
+            color: white;
+        }
+        
+        .download-btn.success {
+            background: var(--success-500);
+            color: white;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Hidden */
+        #imageInput {
+            display: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .studio-main {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
-
-    <img src="https://cdn-icons-png.flaticon.com/512/5024/5024467.png" class="bg-sticker" style="top:10%; left:5%;">
-    <img src="https://cdn-icons-png.flaticon.com/512/944/944458.png" class="bg-sticker" style="top:70%; left:80%;">
-    <img src="https://cdn-icons-png.flaticon.com/512/3132/3132731.png" class="bg-sticker" style="top:20%; right:10%;">
-    <img src="https://cdn-icons-png.flaticon.com/512/2454/2454282.png" class="bg-sticker" style="bottom:10%; left:15%;">
-
-    <div id="search-box">
-        <h2 style="color: #FFB6C1;">Enter Secret Word</h2>
-        <input type="text" id="pass" placeholder="Type here...">
-        <br>
-        <button onclick="unlock()">Unlock Surprise</button>
-    </div>
-
-    <div id="content">
-        
-        <div class="reveal" id="r1">
-            <h2 class="title">Happy Birthday papa</h2>
-            <div class="line"></div>
-        </div>
-
-        <div class="reveal" id="r2">
-            <div class="nav-item">happy birthday so much</div>
-            <div class="line"></div>
-        </div>
-
-        <div class="reveal" id="r3">
-            <div class="nav-item">happy best day </div>
-            <div class="line"></div>
-        </div>
-
-        <div class="reveal" id="r4">
-            <div class="nav-item neon">my father </div>
-            <div class="line"></div>
-        </div>
-
-        <div class="reveal" id="r5">
-            <div class="nav-item"> would best father </div>
-            <div class="line"></div>
-        </div>
-
-        <div class="reveal" id="r6">
-            <div style="font-size: 2rem;">❤️ 😘 💕</div>
-            <div class="line"></div>
-        </div>
-
-        <div class="reveal" id="r7">
-            <div class="neon" style="font-size: 1.4rem;">ȞÄPPŸ BÏŖȚȞĐÄŸ</div>
-            <div class="line"></div>
-        </div>
-
-        <div class="reveal" id="r8">
-            <div class="msg">
-                [I Always pray to Allah for you health and wishes.<br>
-                May you live for thousands and millions of years,<br>
-                may you always be happy, may you never lose anything].
+    <!-- Login Overlay -->
+    <div id="loginOverlay">
+        <div class="login-container">
+            <div class="login-header">
+                <h2>🎨 LOGO STUDIO PRO</h2>
+                <p>Sign in with your Instagram account</p>
             </div>
-            <div class="line"></div>
-        </div>
-
-        <div class="reveal" id="r9">
-            <div class="neon">{18 ᶠᵉᵇʳᵘᵃʳʸ 2026}</div>
-            <div class="line"></div>
-        </div>
-
-        <div class="reveal" id="r10">
-            <div class="msg">
-                May this day, February 18, 2026, be the best for you.<br>
-                May this day be filled with so much happiness that you<br>
-                will always remember it.
+            
+            <div class="login-tabs">
+                <button class="login-tab active" onclick="switchLoginTab('username')">Quick Login</button>
+                <button class="login-tab" onclick="switchLoginTab('instagram')">Instagram</button>
             </div>
-        </div>
-
-    </div>
-
-    <script>
-        function unlock() {
-            var val = document.getElementById("pass").value;
-            if (val === "Happy Birthday papa") {
-                document.getElementById("search-box").style.display = "none";
-                document.getElementById("content").style.display = "block";
+            
+            <!-- Quick Login (Username Only) -->
+            <div id="usernameLogin" class="login-form">
+                <div class="input-group">
+                    <label>Choose Username</label>
+                    <input type="text" id="quickUsername" placeholder="e.g., john_doe" maxlength="30">
+                </div>
                 
-                // Ek ek karke lines ko slow slow reveal karna
-                for (let i = 1; i <= 10; i++) {
-                    setTimeout(() => {
-                        document.getElementById('r' + i).classList.add('active');
-                    }, i * 1200); // 1.2 second ka gap har line ke beech
-                }
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    <span>You'll see demo Instagram data. No password needed.</span>
+                </div>
+                
+                <button class="login-btn" onclick="quickLogin()">
+                    <i class="fas fa-sign-in-alt"></i> Enter Studio
+                </button>
+            </div>
+            
+            <!-- Instagram Login (With Password/OTP) -->
+            <div id="instagramLogin" class="login-form hidden">
+                <div class="input-group">
+                    <label>Instagram Username</label>
+                    <input type="text" id="instaUsername" placeholder="Your Instagram username">
+                </div>
+                
+                <div class="input-group">
+                    <label>Password (Optional - Leave empty for OTP)</label>
+                    <input type="password" id="instaPassword" placeholder="Enter password or leave empty">
+                </div>
+                
+                <button class="login-btn" onclick="handleInstagramLogin()" id="instaLoginBtn">
+                    <i class="fab fa-instagram"></i> Continue
+                </button>
+                
+                <!-- OTP Section - Will be shown dynamically -->
+                <div id="otpSection" class="otp-section" style="display: none;">
+                    <div class="otp-display">
+                        <div class="email-badge" id="otpEmailDisplay">
+                            <i class="fas fa-envelope"></i>
+                            <span id="otpEmail">loading...</span>
+                        </div>
+                        <div class="otp-message" id="otpMessage">
+                            4-digit OTP sent to your connected email
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Enter 4-Digit OTP</label>
+                        <input type="text" id="otpCode" placeholder="e.g., 1234" maxlength="4" pattern="\d*">
+                    </div>
+                    
+                    <div class="otp-timer" id="otpTimer">OTP expires in 05:00</div>
+                    
+                    <button class="login-btn" onclick="verifyOTP()" id="verifyOtpBtn">
+                        <i class="fas fa-check-circle"></i> Verify OTP
+                    </button>
+                    
+                    <div class="login-footer">
+                        <a onclick="resendOTP()">Resend OTP</a>
+                    </div>
+                </div>
+                
+                <div class="login-footer">
+                    <a onclick="forgotPassword()">Forgot password?</a> • 
+                    <a onclick="switchLoginTab('username')">Use quick login instead</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main App -->
+    <div id="mainApp">
+        <div class="app-container">
+            <!-- Header with User Info -->
+            <header class="studio-header">
+                <div class="studio-brand">
+                    <div class="studio-logo">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="studio-title">
+                        <h1>PROFESSIONAL LOGO STUDIO</h1>
+                        <p>Enterprise Edition • 4K Ready • Instagram Connected</p>
+                    </div>
+                </div>
+                
+                <div class="user-info" id="userInfo">
+                    <div class="user-avatar" id="userAvatar">JD</div>
+                    <div class="user-details">
+                        <div class="user-name" id="userNameDisplay">john_doe</div>
+                        <div class="user-email" id="userEmailDisplay">john@gmail.com</div>
+                        <div class="user-stats">
+                            <span><i class="fas fa-users"></i> <span id="followersCount">1,234</span></span>
+                            <span><i class="fas fa-user-check"></i> <span id="followingCount">567</span></span>
+                            <span><i class="fas fa-image"></i> <span id="postsCount">42</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="studio-actions">
+                    <button class="studio-btn secondary" onclick="toggleSocialPanel()">
+                        <i class="fas fa-users"></i> Social
+                    </button>
+                    <button class="studio-btn secondary" onclick="saveProject()">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                    <button class="studio-btn primary" onclick="downloadAll()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Main Grid -->
+            <div class="studio-main">
+                <!-- LEFT PANEL - Letter Styles + Social -->
+                <div class="styles-panel">
+                    <div class="panel-title">
+                        <i class="fas fa-font" style="color: var(--primary-600);"></i>
+                        LETTER STYLES (30+)
+                    </div>
+                    
+                    <div class="letter-grid" id="letterGrid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    
+                    <div class="style-section">
+                        <div class="style-title">
+                            <i class="fas fa-paint-brush"></i>
+                            DESIGN STYLES
+                        </div>
+                        <div class="style-grid" id="letterStyles">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Social Panel (Toggle) -->
+                    <div class="social-panel" id="socialPanel">
+                        <div class="social-header">
+                            <h3><i class="fab fa-instagram"></i> Instagram Network</h3>
+                            <button class="studio-btn secondary" style="padding:5px 10px;" onclick="refreshSocialData()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Stories -->
+                        <div class="stories-row" id="storiesContainer">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                        
+                        <div class="social-stats">
+                            <div class="stat-card">
+                                <div class="stat-number" id="panelFollowers">1.2k</div>
+                                <div class="stat-label">Followers</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="panelFollowing">567</div>
+                                <div class="stat-label">Following</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="panelPosts">42</div>
+                                <div class="stat-label">Posts</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Posts -->
+                        <div class="posts-grid" id="postsGrid">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                        
+                        <div style="margin-top:15px;">
+                            <div class="search-box">
+                                <input type="text" id="userSearch" placeholder="Search users..." oninput="searchUsers()">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            
+                            <div class="users-list" id="usersList">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CENTER PANEL - Canvas -->
+                <div class="canvas-panel">
+                    <div class="canvas-header">
+                        <h2>
+                            <i class="fas fa-eye" style="color: var(--primary-600);"></i>
+                            LIVE PREVIEW
+                        </h2>
+                        <div class="canvas-actions">
+                            <button class="canvas-action-btn" onclick="zoomIn()"><i class="fas fa-search-plus"></i></button>
+                            <button class="canvas-action-btn" onclick="zoomOut()"><i class="fas fa-search-minus"></i></button>
+                            <button class="canvas-action-btn" onclick="resetZoom()"><i class="fas fa-undo"></i></button>
+                            <button class="canvas-action-btn" onclick="toggleGrid()"><i class="fas fa-border-all"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="canvas-container">
+                        <canvas id="mainCanvas" width="1024" height="1024"></canvas>
+                    </div>
+                    
+                    <div class="canvas-info">
+                        <span><i class="fas fa-ruler"></i> 1024x1024 (4K Ready)</span>
+                        <span><i class="fas fa-mobile-alt"></i> Universal Fit</span>
+                    </div>
+                </div>
+                
+                <!-- RIGHT PANEL - Controls -->
+                <div class="controls-panel">
+                    <div class="control-tabs">
+                        <button class="control-tab active" onclick="switchTab('text', this)">Text</button>
+                        <button class="control-tab" onclick="switchTab('colors', this)">Colors</button>
+                        <button class="control-tab" onclick="switchTab('lines', this)">Lines</button>
+                        <button class="control-tab" onclick="switchTab('export', this)">Export</button>
+                    </div>
+                    
+                    <!-- Text Tab -->
+                    <div id="textTab" class="tab-panel active">
+                        <div class="control-group">
+                            <label class="control-label">Font Family</label>
+                            <select class="control-input" id="fontFamily" onchange="updatePreview()">
+                                <option value="Inter">Inter</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Montserrat">Montserrat</option>
+                                <option value="Poppins">Poppins</option>
+                                <option value="Roboto">Roboto</option>
+                                <option value="Playfair Display">Playfair Display</option>
+                                <option value="Lobster">Lobster</option>
+                                <option value="Pacifico">Pacifico</option>
+                                <option value="Dancing Script">Dancing Script</option>
+                                <option value="Anton">Anton</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Font Size</label>
+                            <div class="slider-container">
+                                <input type="range" class="slider" id="fontSize" min="10" max="400" value="200" oninput="updateSize()">
+                                <span class="slider-value" id="fontSizeValue">200px</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Bold</label>
+                            <div class="slider-container">
+                                <input type="range" class="slider" id="fontWeight" min="100" max="900" step="100" value="700" oninput="updateWeight()">
+                                <span class="slider-value" id="weightValue">700</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Letter Spacing</label>
+                            <div class="slider-container">
+                                <input type="range" class="slider" id="letterSpacing" min="-10" max="50" value="0" oninput="updateSpacing()">
+                                <span class="slider-value" id="spacingValue">0px</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Rotate</label>
+                            <div class="slider-container">
+                                <input type="range" class="slider" id="rotate" min="-180" max="180" value="0" oninput="updateRotate()">
+                                <span class="slider-value" id="rotateValue">0°</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Colors Tab -->
+                    <div id="colorsTab" class="tab-panel">
+                        <div class="control-group">
+                            <label class="control-label">Background Color</label>
+                            <div class="color-row">
+                                <div class="color-box">
+                                    <input type="color" id="bgColor" value="#4361ee" oninput="updatePreview()">
+                                    <span>BG</span>
+                                </div>
+                                <div class="color-box">
+                                    <input type="color" id="textColor" value="#ffffff" oninput="updatePreview()">
+                                    <span>Text</span>
+                                </div>
+                                <div class="color-box">
+                                    <input type="color" id="outlineColor" value="#000000" oninput="updatePreview()">
+                                    <span>Outline</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Outline Width</label>
+                            <div class="slider-container">
+                                <input type="range" class="slider" id="outlineWidth" min="0" max="20" value="2" oninput="updateOutline()">
+                                <span class="slider-value" id="outlineValue">2px</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Underline Color</label>
+                            <div class="color-row">
+                                <div class="color-box">
+                                    <input type="color" id="underlineColor" value="#ffd700" oninput="updatePreview()">
+                                    <span>Underline</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Underline Height</label>
+                            <div class="slider-container">
+                                <input type="range" class="slider" id="underlineHeight" min="0" max="20" value="4" oninput="updateUnderline()">
+                                <span class="slider-value" id="underlineValue">4px</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Lines Tab -->
+                    <div id="linesTab" class="tab-panel">
+                        <div class="control-group">
+                            <label class="control-label">Text Lines</label>
+                            <button class="studio-btn primary" style="width:100%; margin-bottom:15px;" onclick="addLine()">
+                                <i class="fas fa-plus"></i> Add New Line
+                            </button>
+                            
+                            <div id="linesContainer">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Export Tab -->
+                    <div id="exportTab" class="tab-panel">
+                        <div class="download-section">
+                            <div class="download-grid">
+                                <button class="download-btn primary" onclick="downloadPNG()">
+                                    <i class="fas fa-download"></i> PNG
+                                </button>
+                                <button class="download-btn primary" onclick="downloadJPG()">
+                                    <i class="fas fa-download"></i> JPG
+                                </button>
+                                <button class="download-btn success" onclick="download192()">
+                                    <i class="fas fa-mobile-alt"></i> 192px
+                                </button>
+                                <button class="download-btn success" onclick="download512()">
+                                    <i class="fas fa-tablet-alt"></i> 512px
+                                </button>
+                                <button class="download-btn success" onclick="download1024()">
+                                    <i class="fas fa-desktop"></i> 1024px
+                                </button>
+                                <button class="download-btn success" onclick="download2048()">
+                                    <i class="fas fa-tv"></i> 2048px
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ========== FIREBASE CONFIGURATION ==========
+        const firebaseConfig = {
+            apiKey: "AIzaSyBxJqJkrAaFf3eR0QWvhet6IvvFVHYExeU",
+            authDomain: "my-market-ff254.firebaseapp.com",
+            projectId: "my-market-ff254",
+            storageBucket: "my-market-ff254.appspot.com",
+            messagingSenderId: "1039626785987",
+            appId: "1:1039626785987:web:ae5a65a0b16444a2cffe76",
+            databaseURL: "https://my-market-ff254-default-rtdb.firebaseio.com"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        
+        // ========== EMAILJS CONFIGURATION ==========
+        emailjs.init("koEV9xXksZoCaxlxV"); // Your public key
+        
+        // ========== GLOBAL VARIABLES ==========
+        let currentUser = null;
+        let otpData = {
+            code: null,
+            email: null,
+            timestamp: null,
+            username: null
+        };
+        let otpTimer = null;
+        
+        // Letter styles array
+        const letterStyles = [
+            { name: 'Classic', gradient: false },
+            { name: 'Bold 3D', gradient: true },
+            { name: 'Neon', gradient: true },
+            { name: 'Gradient', gradient: true },
+            { name: 'Shadow', gradient: false },
+            { name: 'Outline', gradient: false },
+            { name: 'Emboss', gradient: false },
+            { name: 'Glow', gradient: true },
+            { name: 'Metallic', gradient: true },
+            { name: 'Chrome', gradient: true },
+            { name: 'Gold', gradient: true },
+            { name: 'Silver', gradient: true },
+            { name: 'Copper', gradient: true },
+            { name: 'Wood', gradient: true },
+            { name: 'Stone', gradient: false },
+            { name: 'Glass', gradient: true },
+            { name: 'Ice', gradient: true },
+            { name: 'Fire', gradient: true },
+            { name: 'Rainbow', gradient: true },
+            { name: 'Pastel', gradient: true },
+            { name: 'Vintage', gradient: false },
+            { name: 'Retro', gradient: false },
+            { name: 'Modern', gradient: false },
+            { name: 'Minimal', gradient: false },
+            { name: 'Luxury', gradient: true },
+            { name: 'Cartoon', gradient: false },
+            { name: 'Comic', gradient: false },
+            { name: 'Handmade', gradient: false },
+            { name: 'Script', gradient: false },
+            { name: 'Calligraphy', gradient: false }
+        ];
+        
+        // Sample users data
+        const sampleUsers = [
+            { username: 'john_doe', email: 'john@gmail.com', followers: 1234, following: 567, posts: 42, bio: 'Logo Designer' },
+            { username: 'jane_smith', email: 'jane@gmail.com', followers: 2345, following: 890, posts: 78, bio: 'Digital Artist' },
+            { username: 'alex_wong', email: 'alex@gmail.com', followers: 3456, following: 123, posts: 56, bio: 'Creative Director' },
+            { username: 'sarah_khan', email: 'sarah@gmail.com', followers: 4567, following: 456, posts: 23, bio: 'UI/UX Designer' },
+            { username: 'mike_ross', email: 'mike@gmail.com', followers: 5678, following: 789, posts: 91, bio: 'Brand Specialist' }
+        ];
+        
+        // ========== INITIALIZE ==========
+        window.onload = function() {
+            initLetterGrid();
+            initStylesGrid();
+            initLines();
+            updatePreview();
+        };
+        
+        // ========== LOGIN FUNCTIONS ==========
+        function switchLoginTab(tab) {
+            document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.login-form').forEach(f => f.classList.add('hidden'));
+            
+            if (tab === 'username') {
+                document.querySelector('[onclick="switchLoginTab(\'username\')"]').classList.add('active');
+                document.getElementById('usernameLogin').classList.remove('hidden');
             } else {
-                alert("Incorrect! Hint: Happy Birthday papa");
+                document.querySelector('[onclick="switchLoginTab(\'instagram\')"]').classList.add('active');
+                document.getElementById('instagramLogin').classList.remove('hidden');
             }
         }
+        
+        // Quick Login (Username Only)
+        function quickLogin() {
+            const username = document.getElementById('quickUsername').value.trim();
+            if (!username) {
+                alert('Please enter a username');
+                return;
+            }
+            
+            // Create demo user
+            currentUser = {
+                username: username,
+                email: username + '@gmail.com',
+                followers: Math.floor(Math.random() * 5000) + 100,
+                following: Math.floor(Math.random() * 1000) + 50,
+                posts: Math.floor(Math.random() * 100) + 10,
+                avatar: username.substring(0,2).toUpperCase()
+            };
+            
+            // Save to Firebase (optional)
+            saveUserToFirebase(currentUser);
+            
+            // Update UI
+            updateUserUI();
+            
+            // Hide login overlay
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.getElementById('mainApp').classList.add('visible');
+            
+            // Load social data
+            loadSocialData();
+        }
+        
+        // Handle Instagram Login
+        function handleInstagramLogin() {
+            const username = document.getElementById('instaUsername').value.trim();
+            const password = document.getElementById('instaPassword').value;
+            
+            if (!username) {
+                alert('Please enter your Instagram username');
+                return;
+            }
+            
+            // Show loading
+            const btn = document.getElementById('instaLoginBtn');
+            btn.innerHTML = '<span class="spinner"></span> Processing...';
+            btn.disabled = true;
+            
+            if (password) {
+                // Password login - verify (demo)
+                setTimeout(() => {
+                    // In real app, you'd verify with Instagram API
+                    // We're just demoing
+                    alert('Password login successful! (Demo mode)');
+                    
+                    currentUser = {
+                        username: username,
+                        email: username + '@gmail.com',
+                        followers: 1234,
+                        following: 567,
+                        posts: 42,
+                        avatar: username.substring(0,2).toUpperCase()
+                    };
+                    
+                    saveUserToFirebase(currentUser);
+                    updateUserUI();
+                    
+                    document.getElementById('loginOverlay').style.display = 'none';
+                    document.getElementById('mainApp').classList.add('visible');
+                    
+                    loadSocialData();
+                }, 1500);
+            } else {
+                // OTP login - send OTP
+                sendOTP(username);
+            }
+        }
+        
+        // Send OTP to connected email
+        function sendOTP(username) {
+            // Find user's connected email from Firebase/demo
+            const userData = sampleUsers.find(u => u.username === username) || {
+                email: username + '@gmail.com'
+            };
+            
+            const email = userData.email;
+            
+            // Generate 4-digit OTP
+            const otp = Math.floor(1000 + Math.random() * 9000).toString();
+            
+            // Store OTP data
+            otpData = {
+                code: otp,
+                email: email,
+                timestamp: Date.now(),
+                username: username
+            };
+            
+            // Send OTP via EmailJS
+            emailjs.send('service_4j3fqsg', 'template_9wuzw3x', {
+                user_email: email,
+                name: username,
+                message: `🔐 Your 4-digit OTP is: ${otp}\n\nValid for 5 minutes.\n\nDear ${username}, this OTP will verify your identity.`
+            }).then(() => {
+                // Show OTP section
+                document.getElementById('otpSection').style.display = 'block';
+                document.getElementById('otpEmail').textContent = email;
+                
+                // Update button
+                const btn = document.getElementById('instaLoginBtn');
+                btn.innerHTML = '<i class="fab fa-instagram"></i> OTP Sent';
+                btn.disabled = false;
+                
+                // Start timer
+                startOtpTimer(300); // 5 minutes
+                
+                alert(`✅ 4-digit OTP sent to ${email}`);
+            }).catch((error) => {
+                alert('Failed to send OTP: ' + error.text);
+                btn.innerHTML = '<i class="fab fa-instagram"></i> Try Again';
+                btn.disabled = false;
+            });
+        }
+        
+        // Start OTP timer
+        function startOtpTimer(duration) {
+            if (otpTimer) clearInterval(otpTimer);
+            
+            const timerDisplay = document.getElementById('otpTimer');
+            let timeLeft = duration;
+            
+            otpTimer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `OTP expires in ${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(otpTimer);
+                    timerDisplay.textContent = 'OTP expired';
+                    otpData = null;
+                }
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Verify OTP
+        function verifyOTP() {
+            const enteredOtp = document.getElementById('otpCode').value;
+            
+            if (!otpData || !otpData.code) {
+                alert('No OTP was sent. Please try again.');
+                return;
+            }
+            
+            // Check if expired (5 minutes)
+            if (Date.now() - otpData.timestamp > 300000) {
+                alert('OTP expired. Please request a new one.');
+                return;
+            }
+            
+            if (enteredOtp !== otpData.code) {
+                alert('Invalid OTP. Please try again.');
+                return;
+            }
+            
+            // OTP verified - create user
+            currentUser = {
+                username: otpData.username,
+                email: otpData.email,
+                followers: 1234,
+                following: 567,
+                posts: 42,
+                avatar: otpData.username.substring(0,2).toUpperCase()
+            };
+            
+            saveUserToFirebase(currentUser);
+            updateUserUI();
+            
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.getElementById('mainApp').classList.add('visible');
+            
+            loadSocialData();
+            
+            clearInterval(otpTimer);
+        }
+        
+        // Resend OTP
+        function resendOTP() {
+            if (otpData && otpData.username) {
+                sendOTP(otpData.username);
+            } else {
+                alert('Please enter your username again');
+            }
+        }
+        
+        // Forgot Password
+        function forgotPassword() {
+            const username = document.getElementById('instaUsername').value;
+            if (!username) {
+                alert('Please enter your username first');
+                return;
+            }
+            
+            const email = username + '@gmail.com'; // In real app, fetch from Firebase
+            
+            emailjs.send('service_4j3fqsg', 'template_9wuzw3x', {
+                user_email: email,
+                name: username,
+                message: `🔐 Password reset link sent to your email.\n\nClick here to reset your password: https://example.com/reset?user=${username}`
+            }).then(() => {
+                alert(`✅ Password reset link sent to ${email}`);
+            });
+        }
+        
+        // Save user to Firebase
+        function saveUserToFirebase(user) {
+            const userRef = db.ref('users/' + user.username.replace(/[.#$[\]]/g, '_'));
+            userRef.set({
+                username: user.username,
+                email: user.email,
+                followers: user.followers,
+                following: user.following,
+                posts: user.posts,
+                lastLogin: Date.now(),
+                loginMethod: 'otp'
+            });
+        }
+        
+        // Update UI after login
+        function updateUserUI() {
+            document.getElementById('userAvatar').textContent = currentUser.avatar;
+            document.getElementById('userNameDisplay').textContent = currentUser.username;
+            document.getElementById('userEmailDisplay').textContent = currentUser.email;
+            document.getElementById('followersCount').textContent = formatNumber(currentUser.followers);
+            document.getElementById('followingCount').textContent = formatNumber(currentUser.following);
+            document.getElementById('postsCount').textContent = formatNumber(currentUser.posts);
+            
+            document.getElementById('panelFollowers').textContent = formatNumber(currentUser.followers);
+            document.getElementById('panelFollowing').textContent = formatNumber(currentUser.following);
+            document.getElementById('panelPosts').textContent = formatNumber(currentUser.posts);
+        }
+        
+        // Format numbers (e.g., 1234 -> 1.2k)
+        function formatNumber(num) {
+            if (num >= 1000) {
+                return (num/1000).toFixed(1) + 'k';
+            }
+            return num.toString();
+        }
+        
+        // Load social data (stories, posts, users)
+        function loadSocialData() {
+            // Load stories
+            const storiesContainer = document.getElementById('storiesContainer');
+            storiesContainer.innerHTML = '';
+            
+            for (let i = 0; i < 8; i++) {
+                const story = document.createElement('div');
+                story.className = 'story-circle';
+                story.textContent = ['JD','JS','AW','SK','MR','NK','PL','RT'][i];
+                storiesContainer.appendChild(story);
+            }
+            
+            // Load posts
+            const postsGrid = document.getElementById('postsGrid');
+            postsGrid.innerHTML = '';
+            
+            for (let i = 0; i < 6; i++) {
+                const post = document.createElement('div');
+                post.className = 'post-item';
+                post.innerHTML = '<i class="fas fa-image"></i>';
+                postsGrid.appendChild(post);
+            }
+            
+            // Load users list
+            loadUsersList();
+        }
+        
+        // Load users list
+        function loadUsersList(searchTerm = '') {
+            const usersList = document.getElementById('usersList');
+            usersList.innerHTML = '';
+            
+            const filteredUsers = sampleUsers.filter(u => 
+                u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                u.email.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            
+            filteredUsers.forEach(user => {
+                const isCurrentUser = currentUser && user.username === currentUser.username;
+                
+                const userItem = document.createElement('div');
+                userItem.className = 'user-item';
+                userItem.onclick = () => viewUserProfile(user.username);
+                
+                userItem.innerHTML = `
+                    <div class="user-item-avatar">${user.username.substring(0,2).toUpperCase()}</div>
+                    <div class="user-item-info">
+                        <div class="user-item-name">${user.username}</div>
+                        <div class="user-item-email">${user.email}</div>
+                        <div class="user-item-bio">${user.bio}</div>
+                    </div>
+                    ${!isCurrentUser ? `<button class="follow-btn" onclick="event.stopPropagation(); toggleFollow('${user.username}')">Follow</button>` : ''}
+                `;
+                
+                usersList.appendChild(userItem);
+            });
+        }
+        
+        // Search users
+        function searchUsers() {
+            const searchTerm = document.getElementById('userSearch').value;
+            loadUsersList(searchTerm);
+        }
+        
+        // Toggle follow
+        function toggleFollow(username) {
+            const btn = event.target;
+            if (btn.classList.contains('following')) {
+                btn.classList.remove('following');
+                btn.textContent = 'Follow';
+            } else {
+                btn.classList.add('following');
+                btn.textContent = 'Following';
+            }
+        }
+        
+        // View user profile
+        function viewUserProfile(username) {
+            const user = sampleUsers.find(u => u.username === username);
+            if (user) {
+                alert(`👤 ${user.username}\n📧 ${user.email}\n📝 ${user.bio}\n👥 Followers: ${user.followers}\n👣 Following: ${user.following}`);
+            }
+        }
+        
+        // Refresh social data
+        function refreshSocialData() {
+            loadSocialData();
+            alert('Social data refreshed!');
+        }
+        
+        // Toggle social panel
+        function toggleSocialPanel() {
+            const panel = document.getElementById('socialPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // ========== INITIALIZE LETTER GRID ==========
+        function initLetterGrid() {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÆÉÊÃæçñüøåßð'.split('');
+            const grid = document.getElementById('letterGrid');
+            grid.innerHTML = '';
+            
+            letters.forEach((letter, index) => {
+                const btn = document.createElement('div');
+                btn.className = `letter-btn ${index === 0 ? 'selected' : ''}`;
+                btn.textContent = letter;
+                btn.onclick = () => selectLetter(letter, btn);
+                grid.appendChild(btn);
+            });
+        }
+        
+        // ========== INITIALIZE STYLES GRID ==========
+        function initStylesGrid() {
+            const grid = document.getElementById('letterStyles');
+            grid.innerHTML = '';
+            
+            letterStyles.forEach((style, index) => {
+                const item = document.createElement('div');
+                item.className = `style-item ${index === 0 ? 'selected' : ''}`;
+                item.onclick = () => selectStyle(index, item);
+                item.innerHTML = style.name;
+                grid.appendChild(item);
+            });
+        }
+        
+        // ========== SELECT LETTER ==========
+        function selectLetter(letter, element) {
+            document.querySelectorAll('.letter-btn').forEach(btn => btn.classList.remove('selected'));
+            element.classList.add('selected');
+            currentLetter = letter;
+            updatePreview();
+        }
+        
+        // ========== SELECT STYLE ==========
+        function selectStyle(index, element) {
+            document.querySelectorAll('.style-item').forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+            currentStyle = index;
+            updatePreview();
+        }
+        
+        // ========== INITIALIZE LINES ==========
+        let textLines = ['Nightorbit', 'Gyidi Bazar'];
+        
+        function initLines() {
+            const container = document.getElementById('linesContainer');
+            container.innerHTML = '';
+            
+            textLines.forEach((line, index) => {
+                const lineItem = document.createElement('div');
+                lineItem.className = 'line-item';
+                lineItem.innerHTML = `
+                    <div class="line-header">
+                        <span class="line-title">Line ${index + 1}</span>
+                        <div class="line-actions">
+                            <i class="fas fa-arrow-up" onclick="moveLineUp(${index})"></i>
+                            <i class="fas fa-arrow-down" onclick="moveLineDown(${index})"></i>
+                            <i class="fas fa-trash" onclick="removeLine(${index})"></i>
+                        </div>
+                    </div>
+                    <input type="text" class="line-input" value="${line}" onchange="updateLineText(${index}, this.value)">
+                `;
+                container.appendChild(lineItem);
+            });
+        }
+        
+        // ========== LINE FUNCTIONS ==========
+        function addLine() {
+            textLines.push('New Line');
+            initLines();
+            updatePreview();
+        }
+        
+        function removeLine(index) {
+            if (textLines.length > 1) {
+                textLines.splice(index, 1);
+                initLines();
+                updatePreview();
+            } else {
+                alert('At least one line required!');
+            }
+        }
+        
+        function moveLineUp(index) {
+            if (index > 0) {
+                [textLines[index - 1], textLines[index]] = [textLines[index], textLines[index - 1]];
+                initLines();
+                updatePreview();
+            }
+        }
+        
+        function moveLineDown(index) {
+            if (index < textLines.length - 1) {
+                [textLines[index], textLines[index + 1]] = [textLines[index + 1], textLines[index]];
+                initLines();
+                updatePreview();
+            }
+        }
+        
+        function updateLineText(index, value) {
+            textLines[index] = value;
+            updatePreview();
+        }
+        
+        // ========== UPDATE PREVIEW ==========
+        let zoom = 1;
+        let showGrid = false;
+        let currentLetter = 'A';
+        let currentStyle = 0;
+        
+        function updatePreview() {
+            const canvas = document.getElementById('mainCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Background
+            ctx.fillStyle = document.getElementById('bgColor').value;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Get values
+            const fontFamily = document.getElementById('fontFamily').value;
+            const fontSize = parseInt(document.getElementById('fontSize').value);
+            const fontWeight = document.getElementById('fontWeight').value;
+            const letterSpacing = parseInt(document.getElementById('letterSpacing').value);
+            const rotate = parseInt(document.getElementById('rotate').value);
+            const textColor = document.getElementById('textColor').value;
+            const outlineColor = document.getElementById('outlineColor').value;
+            const outlineWidth = parseInt(document.getElementById('outlineWidth').value);
+            const underlineColor = document.getElementById('underlineColor').value;
+            const underlineHeight = parseInt(document.getElementById('underlineHeight').value);
+            
+            // Calculate positions
+            const lineHeight = fontSize * 1.2;
+            const totalHeight = textLines.length * lineHeight;
+            const startY = (canvas.height - totalHeight) / 2 + fontSize / 2;
+            
+            ctx.save();
+            
+            if (rotate !== 0) {
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(rotate * Math.PI / 180);
+                ctx.translate(-canvas.width / 2, -canvas.height / 2);
+            }
+            
+            textLines.forEach((line, index) => {
+                const y = startY + (index * lineHeight);
+                
+                ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
+                ctx.letterSpacing = `${letterSpacing}px`;
+                
+                const metrics = ctx.measureText(line);
+                const textWidth = metrics.width;
+                const x = (canvas.width - textWidth) / 2;
+                
+                if (outlineWidth > 0) {
+                    ctx.strokeStyle = outlineColor;
+                    ctx.lineWidth = outlineWidth;
+                    ctx.strokeText(line, x, y);
+                }
+                
+                ctx.fillStyle = textColor;
+                ctx.fillText(line, x, y);
+                
+                if (underlineHeight > 0) {
+                    ctx.fillStyle = underlineColor;
+                    ctx.fillRect(x, y + 10, textWidth, underlineHeight);
+                }
+            });
+            
+            ctx.restore();
+            
+            if (showGrid) {
+                drawGrid(ctx, canvas.width, canvas.height);
+            }
+        }
+        
+        function drawGrid(ctx, width, height) {
+            ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+            ctx.lineWidth = 1;
+            
+            for (let i = 0; i <= width; i += 50) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, height);
+                ctx.stroke();
+            }
+            
+            for (let i = 0; i <= height; i += 50) {
+                ctx.beginPath();
+                ctx.moveTo(0, i);
+                ctx.lineTo(width, i);
+                ctx.stroke();
+            }
+        }
+        
+        // ========== ZOOM FUNCTIONS ==========
+        function zoomIn() {
+            zoom = Math.min(zoom + 0.2, 3);
+            document.getElementById('mainCanvas').style.transform = `scale(${zoom})`;
+        }
+        
+        function zoomOut() {
+            zoom = Math.max(zoom - 0.2, 0.5);
+            document.getElementById('mainCanvas').style.transform = `scale(${zoom})`;
+        }
+        
+        function resetZoom() {
+            zoom = 1;
+            document.getElementById('mainCanvas').style.transform = `scale(${zoom})`;
+        }
+        
+        function toggleGrid() {
+            showGrid = !showGrid;
+            updatePreview();
+        }
+        
+        // ========== SLIDER UPDATES ==========
+        function updateSize() {
+            const val = document.getElementById('fontSize').value;
+            document.getElementById('fontSizeValue').textContent = val + 'px';
+            updatePreview();
+        }
+        
+        function updateWeight() {
+            const val = document.getElementById('fontWeight').value;
+            document.getElementById('weightValue').textContent = val;
+            updatePreview();
+        }
+        
+        function updateSpacing() {
+            const val = document.getElementById('letterSpacing').value;
+            document.getElementById('spacingValue').textContent = val + 'px';
+            updatePreview();
+        }
+        
+        function updateRotate() {
+            const val = document.getElementById('rotate').value;
+            document.getElementById('rotateValue').textContent = val + '°';
+            updatePreview();
+        }
+        
+        function updateOutline() {
+            const val = document.getElementById('outlineWidth').value;
+            document.getElementById('outlineValue').textContent = val + 'px';
+            updatePreview();
+        }
+        
+        function updateUnderline() {
+            const val = document.getElementById('underlineHeight').value;
+            document.getElementById('underlineValue').textContent = val + 'px';
+            updatePreview();
+        }
+        
+        // ========== TAB SWITCHING ==========
+        function switchTab(tab, element) {
+            document.querySelectorAll('.control-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            
+            element.classList.add('active');
+            document.getElementById(tab + 'Tab').classList.add('active');
+        }
+        
+        // ========== DOWNLOAD FUNCTIONS ==========
+        function downloadPNG() {
+            const canvas = document.getElementById('mainCanvas');
+            const link = document.createElement('a');
+            link.download = 'logo.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        function downloadJPG() {
+            const canvas = document.getElementById('mainCanvas');
+            const link = document.createElement('a');
+            link.download = 'logo.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.95);
+            link.click();
+        }
+        
+        function downloadResized(size) {
+            const canvas = document.getElementById('mainCanvas');
+            const resizedCanvas = document.createElement('canvas');
+            resizedCanvas.width = size;
+            resizedCanvas.height = size;
+            const ctx = resizedCanvas.getContext('2d');
+            ctx.drawImage(canvas, 0, 0, size, size);
+            
+            const link = document.createElement('a');
+            link.download = `logo-${size}.png`;
+            link.href = resizedCanvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        function download192() { downloadResized(192); }
+        function download512() { downloadResized(512); }
+        function download1024() { downloadResized(1024); }
+        function download2048() { downloadResized(2048); }
+        
+        function downloadAll() {
+            downloadPNG();
+            setTimeout(() => download192(), 100);
+            setTimeout(() => download512(), 200);
+            setTimeout(() => download1024(), 300);
+            setTimeout(() => download2048(), 400);
+        }
+        
+        // ========== PROJECT FUNCTIONS ==========
+        function saveProject() {
+            const project = {
+                lines: textLines,
+                fontFamily: document.getElementById('fontFamily').value,
+                fontSize: document.getElementById('fontSize').value,
+                fontWeight: document.getElementById('fontWeight').value,
+                letterSpacing: document.getElementById('letterSpacing').value,
+                rotate: document.getElementById('rotate').value,
+                bgColor: document.getElementById('bgColor').value,
+                textColor: document.getElementById('textColor').value,
+                outlineColor: document.getElementById('outlineColor').value,
+                outlineWidth: document.getElementById('outlineWidth').value,
+                underlineColor: document.getElementById('underlineColor').value,
+                underlineHeight: document.getElementById('underlineHeight').value,
+                currentLetter,
+                currentStyle
+            };
+            
+            const blob = new Blob([JSON.stringify(project)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'logo-project.json';
+            a.click();
+        }
     </script>
-
 </body>
 </html>
