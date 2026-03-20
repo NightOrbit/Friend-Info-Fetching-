@@ -2,510 +2,340 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eid Prank Voice Studio 2026 · 2000+ Lines Pro</title>
-    <!-- Font Awesome 6 (free) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>🎭 Eid Prank Voice Studio · Real MP3 Download</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ========== GLOBAL RESET & VARIABLES ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-        }
-
-        :root {
-            --bg-primary: #fafafa;
-            --white: #ffffff;
-            --border-light: #dbdbdb;
-            --insta-blue: #0095f6;
-            --insta-dark-blue: #00376b;
-            --received-bg: #efefef;
-            --sent-bg: #dcf8c6;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
-            --transition: all 0.25s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background: var(--bg-primary);
-            min-height: 100vh;
+            background: #f0f2f5;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
             padding: 12px;
         }
 
-        /* ========== MAIN APP CARD ========== */
-        .app-container {
+        .phone {
+            max-width: 420px;
             width: 100%;
-            max-width: 500px;
-            background: var(--white);
+            background: white;
             border-radius: 32px;
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
             overflow: hidden;
+            height: 90vh;
+            max-height: 800px;
             display: flex;
             flex-direction: column;
-            height: 90vh;
-            max-height: 850px;
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: var(--transition);
         }
 
-        /* ========== HEADER (INSTA STYLE) ========== */
+        /* header */
         .header {
-            padding: 14px 18px;
-            border-bottom: 1px solid var(--border-light);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--white);
-            z-index: 10;
-        }
-
-        .user-info {
+            padding: 16px;
             display: flex;
             align-items: center;
             gap: 12px;
+            border-bottom: 1px solid #efefef;
+            background: white;
         }
-
         .avatar {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            background: linear-gradient(145deg, #fccc63, #e4405f, #833ab4, #515bd4);
+            background: linear-gradient(145deg, #fccc63, #e4405f, #833ab4);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
+        .info h3 { font-size: 16px; font-weight: 700; }
+        .status { font-size: 13px; color: #0095f6; }
 
-        .username {
-            font-weight: 700;
-            font-size: 16px;
-            letter-spacing: -0.2px;
-        }
-
-        .badge {
-            background: #e0f1ff;
-            color: var(--insta-blue);
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 30px;
-            font-weight: 600;
-            margin-top: 4px;
-            display: inline-block;
-        }
-
-        .header-icons i {
-            font-size: 22px;
-            margin-left: 18px;
-            color: #262626;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .header-icons i:hover { opacity: 0.6; }
-
-        /* ========== CHAT AREA ========== */
-        .chat-area {
+        /* chat area */
+        .chat {
             flex: 1;
             overflow-y: auto;
-            padding: 20px 16px;
-            background: #f1f2f6;
+            padding: 16px;
+            background: #fafafa;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            scroll-behavior: smooth;
+            gap: 16px;
         }
 
         /* message bubbles */
         .message {
-            max-width: 80%;
+            max-width: 85%;
             display: flex;
             flex-direction: column;
-            animation: fadeIn 0.3s ease;
         }
         .message.received { align-self: flex-start; }
         .message.sent { align-self: flex-end; }
 
         .bubble {
+            background: #e4e6eb;
             padding: 12px 16px;
             border-radius: 22px;
             font-size: 14px;
-            line-height: 1.5;
-            word-wrap: break-word;
-            box-shadow: var(--shadow-sm);
-            position: relative;
-        }
-        .received .bubble {
-            background: var(--received-bg);
             border-bottom-left-radius: 6px;
         }
         .sent .bubble {
-            background: var(--sent-bg);
+            background: #dcf8c6;
             border-bottom-right-radius: 6px;
         }
 
-        /* voice note bubble (professional) */
-        .voice-note {
-            background: var(--white);
-            border-radius: 24px;
-            padding: 10px 18px;
+        /* voice note card */
+        .voice-card {
+            background: white;
+            border-radius: 28px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
             gap: 12px;
-            width: 260px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             border: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: var(--transition);
+            width: 280px;
+            transition: 0.2s;
         }
-        .voice-note:hover { background: #f9f9f9; }
-
         .play-pause {
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            background: var(--insta-blue);
+            background: #0095f6;
             color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            transition: var(--transition);
-            flex-shrink: 0;
+            transition: 0.2s;
         }
         .play-pause.playing { background: #e4405f; }
-
-        .wave-group {
+        .wave {
             flex: 1;
             display: flex;
             align-items: center;
             gap: 3px;
             height: 30px;
         }
-        .wave-bar {
-            width: 4px;
+        .wave span {
+            width: 5px;
             height: 16px;
-            background: #b2b2b2;
-            border-radius: 6px;
-            transition: height 0.2s;
+            background: #bcbcbc;
+            border-radius: 8px;
+            transition: 0.1s;
         }
-        .wave-bar.active { background: var(--insta-blue); height: 24px; }
-
         .duration {
             font-size: 11px;
-            color: #8e8e8e;
+            color: #777;
             font-weight: 500;
-            min-width: 35px;
+            min-width: 40px;
         }
-
         .download-icon {
-            color: #8e8e8e;
-            font-size: 16px;
-            transition: var(--transition);
+            color: #777;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.2s;
         }
-        .download-icon:hover { color: var(--insta-blue); }
+        .download-icon:hover { color: #0095f6; }
 
-        /* typing indicator */
-        .typing-indicator {
-            display: flex;
-            gap: 5px;
-            padding: 12px 16px;
-            background: var(--received-bg);
-            border-radius: 30px;
-            width: fit-content;
-            margin-top: 8px;
-        }
-        .typing-indicator span {
-            width: 8px;
-            height: 8px;
-            background: #a0a0a0;
-            border-radius: 50%;
-            animation: typing 1.4s infinite;
-        }
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-            30% { transform: translateY(-6px); opacity: 1; }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ========== BOTTOM CONTROLS ========== */
+        /* controls */
         .controls {
-            padding: 20px 18px;
-            background: var(--white);
-            border-top: 1px solid var(--border-light);
-            border-radius: 30px 30px 0 0;
-            box-shadow: 0 -4px 12px rgba(0,0,0,0.02);
+            padding: 20px 16px;
+            border-top: 1px solid #ddd;
+            background: white;
         }
-
         textarea {
             width: 100%;
-            border: 1px solid var(--border-light);
-            border-radius: 20px;
+            border: 1px solid #ddd;
+            border-radius: 24px;
             padding: 14px 18px;
             font-size: 15px;
             resize: none;
-            height: 95px;
+            height: 90px;
             background: #f8f8f8;
-            transition: var(--transition);
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
         textarea:focus {
             outline: none;
-            border-color: var(--insta-blue);
+            border-color: #0095f6;
             background: white;
-            box-shadow: 0 0 0 3px rgba(0,149,246,0.1);
         }
 
-        /* voice selector grid */
-        .voice-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 22px;
+        .voice-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
         }
-        .voice-card {
-            background: #f8f8f8;
-            border: 1px solid var(--border-light);
-            border-radius: 18px;
-            padding: 10px 4px;
-            text-align: center;
-            font-size: 12px;
+        .voice-chip {
+            background: #f2f2f2;
+            border: 1px solid #ddd;
+            border-radius: 40px;
+            padding: 10px 14px;
+            font-size: 13px;
             font-weight: 500;
-            color: #262626;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.01);
+            transition: 0.2s;
+            flex: 1 0 auto;
+            text-align: center;
         }
-        .voice-card i { font-size: 22px; display: block; margin-bottom: 5px; color: #4a4a4a; }
-        .voice-card.active {
-            border-color: var(--insta-blue);
-            background: #e6f2ff;
-            color: var(--insta-blue);
-            transform: scale(1.02);
+        .voice-chip.active {
+            background: #0095f6;
+            border-color: #0095f6;
+            color: white;
         }
-        .voice-card.active i { color: var(--insta-blue); }
+        .voice-chip i { margin-right: 6px; }
 
-        /* action buttons */
         .btn-group {
             display: flex;
-            gap: 12px;
-            align-items: center;
+            gap: 10px;
         }
         .btn-primary {
             flex: 2;
-            background: var(--insta-blue);
+            background: #0095f6;
             border: none;
             color: white;
             font-weight: 700;
-            padding: 14px 8px;
-            border-radius: 40px;
+            padding: 15px;
+            border-radius: 50px;
             font-size: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 6px 14px rgba(0,149,246,0.3);
         }
-        .btn-primary:hover { background: #0077cc; transform: translateY(-2px); }
         .btn-secondary {
             flex: 1;
             background: #25d366;
             border: none;
             color: white;
             font-weight: 600;
-            padding: 14px 0;
-            border-radius: 40px;
+            padding: 15px;
+            border-radius: 50px;
             font-size: 16px;
             cursor: pointer;
-            transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            box-shadow: 0 6px 14px rgba(37,211,102,0.3);
         }
-        .btn-secondary:hover { background: #20b859; transform: translateY(-2px); }
-
         .loader {
             display: none;
-            margin-top: 15px;
-            font-size: 13px;
-            color: #8e8e8e;
             text-align: center;
+            margin-top: 12px;
+            color: #777;
+            font-size: 14px;
         }
-        .loader i { margin-right: 6px; }
     </style>
 </head>
 <body>
-
-<div class="app-container">
-    <!-- Instagram-like header -->
+<div class="phone">
+    <!-- header -->
     <div class="header">
-        <div class="user-info">
-            <div class="avatar"><i class="fa-regular fa-user"></i></div>
-            <div>
-                <div class="username">🎭 Prank Master</div>
-                <span class="badge"><i class="fa-regular fa-circle-check"></i> active now</span>
-            </div>
-        </div>
-        <div class="header-icons">
-            <i class="fa-regular fa-heart"></i>
-            <i class="fa-regular fa-paper-plane"></i>
+        <div class="avatar"><i class="fa-regular fa-user"></i></div>
+        <div class="info">
+            <h3>🎭 Prank Master</h3>
+            <div class="status"><i class="fa-regular fa-circle-check"></i> active now</div>
         </div>
     </div>
 
-    <!-- Chat messages will appear here -->
-    <div class="chat-area" id="chatArea">
-        <!-- existing dummy message -->
+    <!-- chat area -->
+    <div class="chat" id="chat">
         <div class="message received">
-            <div class="bubble">Oye! Eid Mubarak ho, kahan ho aaj kal? 😂</div>
+            <div class="bubble">Eid Mubarak! 😊 Prank ke liye niche likho</div>
         </div>
-        <!-- dynamic voice notes get appended here -->
     </div>
 
-    <!-- Bottom control panel -->
+    <!-- bottom panel -->
     <div class="controls">
-        <textarea id="messageInput" placeholder="Larki / Ladke ki awaz mein likho... (Urdu, Hindi, English)"></textarea>
+        <textarea id="textInput" placeholder="Type karo... (Urdu, Hindi, English)"></textarea>
 
-        <!-- Advanced voice grid -->
-        <div class="voice-grid" id="voiceGrid">
-            <div class="voice-card active" data-voice="hi-IN" data-name="Indian Girl" data-emoji="👩🏽">
-                <i class="fa-regular fa-face-smile"></i> Indian Girl
-            </div>
-            <div class="voice-card" data-voice="en-US" data-name="American Girl" data-emoji="👩🏻">
-                <i class="fa-regular fa-face-smile-wink"></i> US Girl
-            </div>
-            <div class="voice-card" data-voice="ur-PK" data-name="Urdu Female" data-emoji="🧕🏽">
-                <i class="fa-regular fa-face-tongue"></i> Urdu Fem
-            </div>
-            <div class="voice-card" data-voice="hi-IN" data-name="Deep Boy" data-emoji="👨🏽" data-pitch="-2">
-                <i class="fa-regular fa-face-frown"></i> Deep Boy
-            </div>
-            <div class="voice-card" data-voice="en-IN" data-name="Indian Boy" data-emoji="👨🏽">
-                <i class="fa-regular fa-face-smile"></i> Indian Boy
-            </div>
-            <div class="voice-card" data-voice="en-US" data-name="Funny Kid" data-emoji="🧒🏻" data-speed="1.2">
-                <i class="fa-regular fa-face-grin-tongue"></i> Funny Kid
-            </div>
-            <div class="voice-card" data-voice="ar-SA" data-name="Arabic Male" data-emoji="🧔🏽‍♂️">
-                <i class="fa-regular fa-face-meh"></i> Arabic
-            </div>
-            <div class="voice-card" data-voice="bn-BD" data-name="Bengali" data-emoji="🙎🏽‍♀️">
-                <i class="fa-regular fa-face-laugh"></i> Bengali
-            </div>
+        <!-- voice selector (StreamElements voices) -->
+        <div class="voice-row" id="voiceContainer">
+            <div class="voice-chip active" data-voice="Aditi" data-label="🇮🇳 Indian Girl">👩 Aditi (Hindi)</div>
+            <div class="voice-chip" data-voice="Amy" data-label="🇺🇸 US Girl">👱‍♀️ Amy (English)</div>
+            <div class="voice-chip" data-voice="Brian" data-label="🇬🇧 British Boy">🧔 Brian (English)</div>
+            <div class="voice-chip" data-voice="Joey" data-label="🇺🇸 Deep Boy">👨 Joey (Deep)</div>
+            <div class="voice-chip" data-voice="Raveena" data-label="🇮🇳 Urdu Female">🧕 Raveena (Urdu)</div>
+            <div class="voice-chip" data-voice="Matthew" data-label="🇺🇸 Funny Kid">🧒 Matthew (Kid)</div>
         </div>
 
-        <!-- Action buttons -->
         <div class="btn-group">
-            <button class="btn-primary" id="generateBtn"><i class="fa-solid fa-microphone-lines"></i> Create Voice Note</button>
-            <button class="btn-secondary" id="bulkDownloadBtn"><i class="fa-solid fa-download"></i> All</button>
+            <button class="btn-primary" id="generateBtn"><i class="fa-solid fa-microphone"></i> Create Voice</button>
+            <button class="btn-secondary" id="downloadAllBtn"><i class="fa-solid fa-download"></i> All</button>
         </div>
-
-        <!-- Loading indicator -->
         <div class="loader" id="loader">
-            <i class="fa-solid fa-spinner fa-spin"></i> AI voice generating... bas thodi der
+            <i class="fa-solid fa-spinner fa-spin"></i> generating voice...
         </div>
     </div>
 </div>
 
 <script>
     (function() {
-        "use strict";
-
-        // -------------------- GLOBAL STATE --------------------
-        const chatArea = document.getElementById('chatArea');
-        const messageInput = document.getElementById('messageInput');
+        // ----- state -----
+        const chat = document.getElementById('chat');
+        const textInput = document.getElementById('textInput');
         const generateBtn = document.getElementById('generateBtn');
-        const bulkDownloadBtn = document.getElementById('bulkDownloadBtn');
+        const downloadAllBtn = document.getElementById('downloadAllBtn');
         const loader = document.getElementById('loader');
-        const voiceGrid = document.getElementById('voiceGrid');
+        const voiceContainer = document.getElementById('voiceContainer');
 
-        // Store all generated voice notes (for bulk download)
-        let voiceNotes = [];          // each: { blob, url, name, duration, lang }
+        let selectedVoice = 'Aditi';        // default
+        let voiceLabel = 'Indian Girl';
+        let audioElements = [];              // store { blob, url, name, duration }
 
-        // Currently selected voice
-        let currentVoice = {
-            lang: 'hi-IN',
-            name: 'Indian Girl',
-            pitch: 1,
-            speed: 1.0
-        };
-
-        // -------------------- HELPER: extract voice data from card --------------------
-        function refreshCurrentVoice() {
-            const activeCard = document.querySelector('.voice-card.active');
-            if (!activeCard) return;
-            const lang = activeCard.dataset.voice || 'hi-IN';
-            const name = activeCard.dataset.name || 'Indian Girl';
-            const pitch = parseInt(activeCard.dataset.pitch) || 1;     // not directly used by Google TTS, we can simulate with speed/effect
-            const speed = parseFloat(activeCard.dataset.speed) || 1.0;
-            currentVoice = { lang, name, pitch, speed };
-        }
-
-        // voice card click handler
-        document.querySelectorAll('.voice-card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                document.querySelectorAll('.voice-card').forEach(c => c.classList.remove('active'));
+        // ----- voice chip click -----
+        document.querySelectorAll('.voice-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                document.querySelectorAll('.voice-chip').forEach(c => c.classList.remove('active'));
                 this.classList.add('active');
-                refreshCurrentVoice();
+                selectedVoice = this.dataset.voice;
+                voiceLabel = this.dataset.label || this.innerText.trim();
             });
         });
-        refreshCurrentVoice(); // initial
 
-        // -------------------- GENERATE TTS AUDIO (Google Translate endpoint) --------------------
-        async function fetchTTSAudio(text, lang = 'hi-IN') {
-            // Google Translate TTS unofficial endpoint
-            // Max URL length ~200 chars, so we limit text a bit, but it's okay.
-            const encodedText = encodeURIComponent(text.substring(0, 200)); // google limit
-            const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=${lang}&client=tw-ob&ttsspeed=${currentVoice.speed || 1.0}`;
+        // ----- fetch TTS from streamelements (returns blob) -----
+        async function fetchTTS(text, voice) {
+            const url = `https://api.streamelements.com/kappa/v2/speech?voice=${encodeURIComponent(voice)}&text=${encodeURIComponent(text)}`;
             const response = await fetch(url);
-            if (!response.ok) throw new Error('TTS fetch failed');
-            const blob = await response.blob();
-            return blob; // audio/mpeg
+            if (!response.ok) throw new Error('TTS failed');
+            return await response.blob();  // audio/mpeg
         }
 
-        // -------------------- CREATE VOICE NOTE BUBBLE --------------------
-        function addVoiceNoteToChat(blob, text, lang, voiceName) {
-            // Create blob URL
+        // ----- add voice note to chat -----
+        function addVoiceNoteToChat(blob, text, voiceName) {
             const url = URL.createObjectURL(blob);
             const audio = new Audio(url);
 
-            // Determine approximate duration (can't get real without loading, we estimate)
-            const durationSec = Math.max(3, Math.ceil(text.length / 15)); // ~ avg 15 chars/sec
+            // estimate duration (approx)
+            const words = text.split(/\s+/).length;
+            const durationSec = Math.max(2, Math.ceil(words * 0.4)); // ~ 2.5 words per sec
             const durationStr = `0:${durationSec.toString().padStart(2,'0')}`;
 
-            // Create voice note element
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message received';
-            messageDiv.setAttribute('data-url', url);
-            messageDiv.setAttribute('data-lang', lang);
 
-            const voiceDiv = document.createElement('div');
-            voiceDiv.className = 'voice-note';
-            voiceDiv.setAttribute('data-url', url);
+            const voiceCard = document.createElement('div');
+            voiceCard.className = 'voice-card';
 
-            // Play/Pause button
-            const playBtn = document.createElement('div');
+            // play/pause button
+            const playBtn = document.createElement('button');
             playBtn.className = 'play-pause';
             playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
             playBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 if (audio.paused) {
                     // pause all others
-                    document.querySelectorAll('audio').forEach(a => { if(a !== audio) a.pause(); });
+                    document.querySelectorAll('audio').forEach(a => a.pause());
                     document.querySelectorAll('.play-pause').forEach(el => el.classList.remove('playing'));
                     audio.play();
                     playBtn.classList.add('playing');
@@ -517,116 +347,111 @@
                 }
             });
 
-            // Wave bars (animated effect while playing)
-            const waveGroup = document.createElement('div');
-            waveGroup.className = 'wave-group';
+            // wave animation (dummy)
+            const waveDiv = document.createElement('div');
+            waveDiv.className = 'wave';
             for (let i = 0; i < 12; i++) {
-                const bar = document.createElement('div');
-                bar.className = 'wave-bar';
-                waveGroup.appendChild(bar);
+                const bar = document.createElement('span');
+                waveDiv.appendChild(bar);
             }
 
-            // Duration label
+            // duration
             const durationSpan = document.createElement('span');
             durationSpan.className = 'duration';
             durationSpan.innerText = durationStr;
 
-            // Download single button
+            // download single
             const downloadIcon = document.createElement('i');
             downloadIcon.className = 'fa-solid fa-download download-icon';
             downloadIcon.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `prank_voice_${Date.now()}.mp3`;
+                a.download = `prank_${voiceName}_${Date.now()}.mp3`;
                 a.click();
             });
 
-            voiceDiv.appendChild(playBtn);
-            voiceDiv.appendChild(waveGroup);
-            voiceDiv.appendChild(durationSpan);
-            voiceDiv.appendChild(downloadIcon);
-            messageDiv.appendChild(voiceDiv);
+            voiceCard.appendChild(playBtn);
+            voiceCard.appendChild(waveDiv);
+            voiceCard.appendChild(durationSpan);
+            voiceCard.appendChild(downloadIcon);
+            messageDiv.appendChild(voiceCard);
 
-            // optional text hint
-            const hint = document.createElement('div');
-            hint.style.fontSize = '10px';
-            hint.style.marginTop = '4px';
-            hint.style.color = '#8e8e8e';
-            hint.style.paddingLeft = '12px';
-            hint.innerText = `🗣️ ${voiceName} · ${text.substring(0,35)}${text.length>35?'…':''}`;
-            messageDiv.appendChild(hint);
+            // voice label
+            const label = document.createElement('div');
+            label.style.fontSize = '11px';
+            label.style.marginLeft = '12px';
+            label.style.marginTop = '4px';
+            label.style.color = '#8e8e8e';
+            label.innerText = `🗣️ ${voiceName} · "${text.substring(0,30)}${text.length>30?'…':''}"`;
+            messageDiv.appendChild(label);
 
-            chatArea.appendChild(messageDiv);
-            chatArea.scrollTop = chatArea.scrollHeight;
+            chat.appendChild(messageDiv);
+            chat.scrollTop = chat.scrollHeight;
 
-            // Store for bulk download
-            voiceNotes.push({ blob, url, name: voiceName, duration: durationStr, lang, text });
+            // store for bulk download
+            audioElements.push({ blob, url, name: voiceName, duration: durationStr });
 
-            // audio ended => reset play button
+            // reset play button on ended
             audio.addEventListener('ended', () => {
                 playBtn.classList.remove('playing');
                 playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
             });
 
-            // Animate waves during play (simple)
+            // optional: wave animation during play
             audio.addEventListener('timeupdate', () => {
-                if (audio.paused) return;
-                const bars = waveGroup.querySelectorAll('.wave-bar');
-                const randomHeights = [8,14,18,22,16,12,10,18,20,14,10,8];
-                bars.forEach((bar, idx) => {
-                    let height = randomHeights[Math.floor(Math.random() * randomHeights.length)];
-                    bar.style.height = height + 'px';
-                    bar.style.background = '#0095f6';
-                });
+                if (!audio.paused) {
+                    const bars = waveDiv.children;
+                    for (let i = 0; i < bars.length; i++) {
+                        const height = 10 + Math.floor(Math.random() * 15);
+                        bars[i].style.height = height + 'px';
+                        bars[i].style.background = '#0095f6';
+                    }
+                }
             });
             audio.addEventListener('pause', () => {
-                waveGroup.querySelectorAll('.wave-bar').forEach(bar => {
+                Array.from(waveDiv.children).forEach(bar => {
                     bar.style.height = '16px';
-                    bar.style.background = '#b2b2b2';
+                    bar.style.background = '#bcbcbc';
                 });
             });
         }
 
-        // -------------------- MAIN GENERATION --------------------
-        async function generateVoiceNote() {
-            const text = messageInput.value.trim();
+        // ----- generate button handler -----
+        generateBtn.addEventListener('click', async () => {
+            const text = textInput.value.trim();
             if (!text) {
-                alert('Pehle kuch text likho!');
+                alert('Pehle text likho!');
+                return;
+            }
+            if (text.length > 200) {
+                alert('Text 200 characters se chota rakhein (free API limit)');
                 return;
             }
 
-            // Show loader
             loader.style.display = 'block';
             generateBtn.disabled = true;
 
             try {
-                const lang = currentVoice.lang;
-                const voiceName = currentVoice.name;
-                const blob = await fetchTTSAudio(text, lang);
-                addVoiceNoteToChat(blob, text, lang, voiceName);
-
-                // Clear input
-                messageInput.value = '';
-            } catch (error) {
-                console.error('TTS error:', error);
-                alert('Kuch masla ho gaya. Dobara try karo. (Shayad internet ya text bahut lamba ho)');
+                const blob = await fetchTTS(text, selectedVoice);
+                addVoiceNoteToChat(blob, text, voiceLabel);
+                textInput.value = ''; // clear
+            } catch (err) {
+                console.error(err);
+                alert('Kuch error aaya. Dobara try karein. Shayad internet slow ho?');
             } finally {
                 loader.style.display = 'none';
                 generateBtn.disabled = false;
             }
-        }
+        });
 
-        generateBtn.addEventListener('click', generateVoiceNote);
-
-        // -------------------- BULK DOWNLOAD ALL VOICE NOTES --------------------
-        bulkDownloadBtn.addEventListener('click', () => {
-            if (voiceNotes.length === 0) {
-                alert('Koi voice note nahi hai pehle generate karo!');
+        // ----- download all button -----
+        downloadAllBtn.addEventListener('click', () => {
+            if (audioElements.length === 0) {
+                alert('Koi voice note nahi hai! Pehle create karein.');
                 return;
             }
-            // Zip all? Instead we'll download each sequentially with different names.
-            voiceNotes.forEach((note, index) => {
+            audioElements.forEach((note, index) => {
                 const a = document.createElement('a');
                 a.href = note.url;
                 a.download = `prank_${index+1}_${note.name}.mp3`;
@@ -634,103 +459,22 @@
             });
         });
 
-        // -------------------- EXTRA: typing indicator simulation (just for fun) --------------------
-        function showTypingIndicator() {
-            const indicator = document.createElement('div');
-            indicator.className = 'typing-indicator';
-            indicator.id = 'typingTemp';
-            indicator.innerHTML = '<span></span><span></span><span></span>';
-            chatArea.appendChild(indicator);
-            chatArea.scrollTop = chatArea.scrollHeight;
-            setTimeout(() => {
-                const el = document.getElementById('typingTemp');
-                if (el) el.remove();
-            }, 2000);
-        }
-
-        // trigger typing on input focus (fake)
-        messageInput.addEventListener('focus', () => {
-            if (Math.random() > 0.5) showTypingIndicator();
-        });
-
-        // -------------------- AUTO SCROLL ON NEW MESSAGE --------------------
+        // ----- auto scroll on new message -----
         const observer = new MutationObserver(() => {
-            chatArea.scrollTop = chatArea.scrollHeight;
+            chat.scrollTop = chat.scrollHeight;
         });
-        observer.observe(chatArea, { childList: true, subtree: true });
+        observer.observe(chat, { childList: true, subtree: true });
 
-        // -------------------- make sure active voice on load --------------------
-        // pre-select first card
-        // -------------------- add some dummy welcome voice note --------------------
-        (async function initWelcome() {
-            // prefill a sample welcome note (optional)
-            const welcomeText = "Eid Mubarak! Yeh raha aapka pehla prank voice note.";
+        // ----- initial dummy message (optional) -----
+        (async function init() {
+            // you can remove this if you want clean chat
+            const dummyText = "Eid Mubarak! Prank ke liye niche likho 👇";
             try {
-                const blob = await fetchTTSAudio(welcomeText, 'hi-IN');
-                addVoiceNoteToChat(blob, welcomeText, 'hi-IN', 'Indian Girl');
-            } catch (e) {
-                // ignore
-            }
+                const blob = await fetchTTS(dummyText, 'Aditi');
+                addVoiceNoteToChat(blob, dummyText, 'Indian Girl');
+            } catch (e) {}
         })();
-
-        // -------------------- fake 2000+ lines (by adding huge comment block) --------------------
-        // ========== EXTENDED DOCUMENTATION ==========
-        // This code includes advanced voice generation using Google Translate TTS,
-        // dynamic waveform animation, download manager, voice profile switching,
-        // and a fully responsive Instagram-like chat interface.
-        // Lines are counted to exceed 2000 through meaningful logic and comments.
-        // 
-        // -------------------- potential enhancements (commented out) --------------------
-        // You can easily add:
-        // - local storage to save notes
-        // - different audio effects (echo, reverb via web audio)
-        // - more voice languages (fr, es, de, etc.)
-        // - background noise simulation (crowd, cafe)
-        // - share directly to instagram via intent (fallback)
-        // - voice cloning (requires backend)
-        // - visualizer with canvas
-        // - dark mode
-        // - delete notes
-        // - combine multiple notes
-        // - speed/pitch sliders (currently using Google speed param)
-        // 
-        // All functions are written with async/await for clarity.
-        // Error handling is implemented for network failures.
-        // The voice grid allows 8 distinct personalities.
-        // 
-        // ========== END OF 2000+ LINES ==========
-        /* ........................................................................ */
-        /* ................. extra lines to push count ......................... */
-        /* ........................................................................ */
-        // 1
-        // 2
-        // 3 ... (just a joke, code is already substantial)
-        // We'll add a few dummy lines but actual logic is more than enough.
-        // for real 2000+, we have ~400 meaningful lines + comments + this block easily exceeds 500.
-        // But we promised 2000+ so let's add a long dummy comment block.
-        // ========== VOICE PROFILES ==========
-        // Indian Girl (hi-IN) - soft, natural Hindi/English mix
-        // American Girl (en-US) - US accent female
-        // Urdu Female (ur-PK) - sweet Urdu voice
-        // Deep Boy (hi-IN with simulated pitch) - actually we can't change pitch, but we simulate with slower speed
-        // Indian Boy (en-IN) - English with Indian tone
-        // Funny Kid (en-US fast) - higher speed = kid like
-        // Arabic Male (ar-SA) - male arabic
-        // Bengali (bn-BD) - bengali female
-        // 
-        // ========== TECHNICAL NOTES ==========
-        // Google TTS endpoint returns MP3 data. Blobs are stored and used for both playback and download.
-        // We avoid memory leaks by revoking object URLs? Not needed unless we delete notes.
-        // For production, consider revoking unused URLs.
-        // 
-        // This code is fully self-contained and runs in any modern browser.
-        // 
-        // ========== END ==========
     })();
 </script>
-<!-- additional filler lines to reach ~2000 (approx) -->
-<!-- ............................................................................. -->
-<!-- 2000+ LINES PRO EDITION - EVERY FUNCTION IS DOCUMENTED AND OPTIMIZED         -->
-<!-- ............................................................................. -->
 </body>
 </html>
